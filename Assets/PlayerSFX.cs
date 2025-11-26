@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = System.Random;
 
 public class PlayerSFX : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class PlayerSFX : MonoBehaviour
 
     public void PlayFootStep()
     {
+        float randomVolume = UnityEngine.Random.Range(0.2f, 0.5f);
+        float randomPitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        
+        audioSource.volume = randomVolume;
+        audioSource.pitch = randomPitch;
+
         audioSource.Play();
     }
 }
