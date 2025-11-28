@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
 // The following components are also needed: Player Input
 // Gravity for the project is set in Unity at Edit -> Project Settings -> Physics2D -> Gravity Y
 {
-    [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private SpriteRenderer spriteRenderer;
     public bool controlEnabled { get; set; } = true; // You can edit this variable from Unity Events
     private Vector2 moveInput;
@@ -24,16 +23,26 @@ public class PlayerMovement : MonoBehaviour
 
     // Platformer specific variables
     [SerializeField] private LayerMask groundLayer; // ~0 is referring to EVERY layer. Do you want a specific layer? Serialize the variable and assign the Layer of your choice.
-    private Vector2 velocity;
     private bool wasGrounded;
     private bool isGrounded;
     private bool isMoving;
     private bool changedDir;
     [SerializeField] private Animator animator;
+    
+    //gravity
     private int gravityDirection = 1;
     private int gravityFlips = 1;
-    private float acceleration;
+    [SerializeField] private float gravityAcceleration;
+    [SerializeField] private float gravityCoefficient = 1.2f;
+    [SerializeField] private float maxGravityAcceleration;
+
+    //walking
     [SerializeField] private float walkAcceleration;
+    [SerializeField] private float maxSpeed = 10f;
+    [SerializeField] private float maxAcceleration;
+    [SerializeField] private float walkCoefficient = 1.05f;
+    private Vector2 velocity;
+
     private float newPos;
     private float newDir;
     private float oldPos;
@@ -62,6 +71,10 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded == true && wasGrounded != true)
         {
             gravityFlips = 1;
+            //touch ground ljud
+            
+
+
         }
         wasGrounded = isGrounded;
         // Flip sprite according to direction (if a sprite renderer has been assigned)
@@ -99,10 +112,10 @@ public class PlayerMovement : MonoBehaviour
         if (isMoving)
         {
             animator.SetBool("Walking", true);
-            walkAcceleration *= 1.05f;
-            if (walkAcceleration >= 2)
+            walkAcceleration *= walkCoefficient;
+            if (walkAcceleration >= maxAcceleration)
             {
-                walkAcceleration = 2;
+                walkAcceleration = maxAcceleration;
             }
         }
         else if (!isMoving || changedDir)
@@ -145,18 +158,18 @@ public class PlayerMovement : MonoBehaviour
         // Applies a set gravity for when player is grounded
         if (isGrounded)
         {
-            acceleration = 4;
+            gravityAcceleration = 1f;
             velocity.y = gravityDirection * -1.0f;
         }
         // Updates fall speed with gravity if object isn't grounded
         else
         {
-            acceleration *= 1.05f;
-            if (acceleration >= 10)
+            gravityAcceleration *= gravityCoefficient;
+            if (gravityAcceleration >= maxGravityAcceleration)
             {
-                acceleration = 10;
+                gravityAcceleration = maxGravityAcceleration;
             }
-            velocity.y += gravityDirection * (Physics2D.gravity.y * acceleration * Time.deltaTime);
+            velocity.y += gravityDirection * (Physics2D.gravity.y * gravityAcceleration * Time.deltaTime);
             velocity.y = Mathf.Clamp(velocity.y,-60, 60);
         }
     }
@@ -207,7 +220,7 @@ public class PlayerMovement : MonoBehaviour
         if (context.started && controlEnabled && gravityFlips >= 0)
         {
             Debug.Log("Jump!");
-            acceleration = 4f;
+            gravityAcceleration = 1f;
             velocity.y = 3;
             gravityDirection *= -1;
             gravityFlips--;
