@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9dbaba223ff9aeb4b8e24a37ecdd1a6b
+guid: 6b2af35289b01c2459fece4428ce542d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4576855330478107338
-    second: DartTrapV2_0
+      213: -6620107823054097611
+    second: SpearTrapV1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DartTrapV2_0
+      name: SpearTrapV1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 256
-        height: 256
+        height: 255
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aca20818ca1448f30800000000000000
-      internalID: 4576855330478107338
+      spriteID: 53373108207a024a0800000000000000
+      internalID: -6620107823054097611
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DartTrapV2_0: 4576855330478107338
+      SpearTrapV1_0: -6620107823054097611
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
