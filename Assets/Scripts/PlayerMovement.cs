@@ -1,12 +1,6 @@
 
-using System;
-using System.Collections.Generic;
-using System.Net;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using UnityEngine.WSA;
 
 public class PlayerMovement : MonoBehaviour
 /////////////// INFORMATION ///////////////
@@ -32,14 +26,14 @@ public class PlayerMovement : MonoBehaviour
     //gravity
     private int gravityDirection = 1;
     private int gravityFlips = 1;
-    [SerializeField] private float gravityAcceleration;
+    [SerializeField] private float gravityAcceleration = 1f;
     [SerializeField] private float gravityCoefficient = 1.2f;
-    [SerializeField] private float maxGravityAcceleration;
+    [SerializeField] private float maxGravityAcceleration = 10f;
 
     //walking
-    [SerializeField] private float walkAcceleration;
+    [SerializeField] private float walkAcceleration = 1f;
     [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private float maxAcceleration;
+    [SerializeField] private float maxAcceleration = 10f;
     [SerializeField] private float walkCoefficient = 1.05f;
     private Vector2 velocity;
 
@@ -72,9 +66,6 @@ public class PlayerMovement : MonoBehaviour
         {
             gravityFlips = 1;
             //touch ground ljud
-            
-
-
         }
         wasGrounded = isGrounded;
         // Flip sprite according to direction (if a sprite renderer has been assigned)
@@ -121,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         else if (!isMoving || changedDir)
         {
             animator.SetBool("Walking", false);
+            velocity.x = 0;
             walkAcceleration = 1f;
         }
     }
@@ -219,7 +211,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.started && controlEnabled && gravityFlips >= 0)
         {
-            Debug.Log("Jump!");
             gravityAcceleration = 1f;
             velocity.y = 3;
             gravityDirection *= -1;
