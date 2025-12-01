@@ -36,7 +36,7 @@ public class FireTrapScript : MonoBehaviour
             fireParticleSystem.Play();
             StartTimer();
 
-            //fire sound
+            audio.Play();
 
 
         }
