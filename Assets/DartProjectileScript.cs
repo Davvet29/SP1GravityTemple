@@ -16,7 +16,7 @@ public class DartProjectileScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (isFlipped)
         {
-            transform.RotateAround (transform.position, transform.up, 180f);
+            transform.RotateAround(transform.position, transform.up, 180f);
         }
     }
 
@@ -24,5 +24,13 @@ public class DartProjectileScript : MonoBehaviour
     void Update()
     {
         rb.AddForce(transform.right * speed);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Ground")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
