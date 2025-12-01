@@ -13,6 +13,6 @@ public class DartProjectileScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.AddForce(transform.up * speed);
+        rb.AddForce(transform.right * speed);
     }
 }
