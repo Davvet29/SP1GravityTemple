@@ -5,10 +5,13 @@ using Random = System.Random;
 public class PlayerSFX : MonoBehaviour
 {
     private AudioSource audioSource;
+    private AudioSource gravitySource;
+    private bool changedDir;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        gravitySource = GameObject.Find("GravitySound").GetComponent<AudioSource>();
     }
 
     public void PlayFootStep()
@@ -20,5 +23,11 @@ public class PlayerSFX : MonoBehaviour
         audioSource.pitch = randomPitch;
 
         audioSource.Play();
+    }
+
+    public void PlayGravityFlip()
+    {
+        Debug.Log("Playing sound");
+        gravitySource.Play();
     }
 }

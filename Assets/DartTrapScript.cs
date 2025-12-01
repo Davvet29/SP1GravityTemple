@@ -21,9 +21,6 @@ public class DartTrapScript : MonoBehaviour
 
     void Update()
     {
-        
-
-        Debug.Log(dartTransform.position);
         if(timer > 0)
         {
             timer -= Time.deltaTime;

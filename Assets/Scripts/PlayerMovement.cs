@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -20,15 +21,18 @@ public class PlayerMovement : MonoBehaviour
     private bool wasGrounded;
     private bool isGrounded;
     private bool isMoving;
-    private bool changedDir;
+    [SerializeField] public bool changedDir;
     [SerializeField] private Animator animator;
     
     //gravity
     private int gravityDirection = 1;
     private int gravityFlips = 1;
+    private bool gravityFlipped;
     [SerializeField] private float gravityAcceleration = 1f;
     [SerializeField] private float gravityCoefficient = 1.2f;
     [SerializeField] private float maxGravityAcceleration = 10f;
+
+    public UnityEvent ChangeGravity;
 
     //walking
     [SerializeField] private float walkAcceleration = 1f;
@@ -43,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     private float oldDir;
     private Transform topCollider;
     private Transform bottomCollider;
-    //public List<AudioClip> sounds = new List<AudioClip>();
+
     void Awake()
     {
         Transform transformTop = transform.GetChild(1);
@@ -115,6 +119,11 @@ public class PlayerMovement : MonoBehaviour
             velocity.x = 0;
             walkAcceleration = 1f;
         }
+        if(gravityFlipped)
+        {
+            ChangeGravity.Invoke();
+        }
+        gravityFlipped = false;
     }
     private bool LayerCollider(Transform colliderTransform)
     {
@@ -215,6 +224,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = 3;
             gravityDirection *= -1;
             gravityFlips--;
+            gravityFlipped = true;
         }
     }
 }
