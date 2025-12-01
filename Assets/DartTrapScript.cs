@@ -1,18 +1,28 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DartTrapScript : MonoBehaviour
 {
     [SerializeField] private GameObject dart;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject dartPositionObject;
     private Transform dartTransform;
     private float timer;
     [SerializeField] private float startTime = 5;
     void Start()
     {
-        dartTransform = GetComponentInChildren<Transform>();
+        dartTransform = dartPositionObject.transform;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if(spriteRenderer.flipX)
+        {
+            dartTransform.position.Scale(new Vector3(-1,0,0));
+        }
     }
 
     void Update()
     {
+        
+
         Debug.Log(dartTransform.position);
         if(timer > 0)
         {
@@ -26,8 +36,12 @@ public class DartTrapScript : MonoBehaviour
 
     private void SpawnDart()
     {
-        GameObject tempdart = Instantiate(dart, transform.position, transform.rotation);
-        tempdart.transform.position += dartTransform.position;
+        GameObject tempdart = Instantiate(dart, dartTransform.position, transform.rotation);
+        tempdart.transform.SetParent(transform);
+        if(spriteRenderer.flipX)
+        {
+            tempdart.GetComponent<DartProjectileScript>().isFlipped = true;
+        }
         StartTimer();
     }
 
