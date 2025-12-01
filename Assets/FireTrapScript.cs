@@ -4,6 +4,7 @@ using UnityEngine;
 public class FireTrapScript : MonoBehaviour
 {
     private ParticleSystem fireParticleSystem;
+    private AudioSource audio;
     private float timer;
     [SerializeField] private float startTime = 5;
 
@@ -12,6 +13,7 @@ public class FireTrapScript : MonoBehaviour
     {
         timer = startTime;
         fireParticleSystem = GetComponentInChildren<ParticleSystem>();
+        audio = GetComponentInChildren<AudioSource>();
     }
 
 
@@ -33,6 +35,10 @@ public class FireTrapScript : MonoBehaviour
         {
             fireParticleSystem.Play();
             StartTimer();
+
+            //fire sound
+
+
         }
     }
 
