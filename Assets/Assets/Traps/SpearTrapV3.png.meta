@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6b2af35289b01c2459fece4428ce542d
+guid: 2ea865fdaa020cd4bb708345a47d5675
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6620107823054097611
-    second: SpearTrapV1_0
+      213: -8013822063437672275
+    second: SpearTrapV3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SpearTrapV1_0
+      name: SpearTrapV3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 53373108207a024a0800000000000000
-      internalID: -6620107823054097611
+      spriteID: da01c97da4f29c090800000000000000
+      internalID: -8013822063437672275
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SpearTrapV1_0: -6620107823054097611
+      SpearTrapV3_0: -8013822063437672275
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -7,6 +7,7 @@ public class FireTrapScript : MonoBehaviour
     private AudioSource audio;
     private float timer;
     [SerializeField] private float startTime = 5;
+    private GameObject fireCollider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,6 +15,7 @@ public class FireTrapScript : MonoBehaviour
         timer = startTime;
         fireParticleSystem = GetComponentInChildren<ParticleSystem>();
         audio = GetComponentInChildren<AudioSource>();
+        fireCollider = transform.GetChild(1).gameObject;
     }
 
 
@@ -27,6 +29,11 @@ public class FireTrapScript : MonoBehaviour
         {
             StartFlames();
         }
+
+        if(!fireParticleSystem.isPlaying)
+        {
+            fireCollider.SetActive(false);
+        }
     }
 
     private void StartFlames()
@@ -34,6 +41,7 @@ public class FireTrapScript : MonoBehaviour
         if (!fireParticleSystem.isPlaying)
         {
             fireParticleSystem.Play();
+            fireCollider.SetActive(true);
             StartTimer();
 
             audio.Play();

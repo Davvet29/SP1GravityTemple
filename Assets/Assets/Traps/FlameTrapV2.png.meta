@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c639b90b822ff24428986f9ddf30753d
+guid: 22c37b9096fbcdf488ec12ad42ffc2d6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4576855330478107338
-    second: DartTrapV2_0
+      213: -3857913006225313163
+    second: FlameTrapV2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -74,8 +74,8 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
-    textureCompression: 0
+    textureFormat: -1
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DartTrapV2_0
+      name: FlameTrapV2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aca20818ca1448f30800000000000000
-      internalID: 4576855330478107338
+      spriteID: 572b4999f80f57ac0800000000000000
+      internalID: -3857913006225313163
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DartTrapV2_0: 4576855330478107338
+      FlameTrapV2_0: -3857913006225313163
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

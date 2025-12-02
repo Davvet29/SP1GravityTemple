@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 6b2af35289b01c2459fece4428ce542d, type: 3}
+  m_Sprite: {fileID: -8013822063437672275, guid: 2ea865fdaa020cd4bb708345a47d5675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,7 +126,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 0.99609375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -160,13 +160,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5136345069929707523}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02, y: -0.32, z: 0}
-  m_LocalScale: {x: 0.090342, y: 1.8604133, z: 0.945}
+  m_LocalRotation: {x: -0, y: -0, z: 0.70710576, w: 0.70710784}
+  m_LocalPosition: {x: 0.043, y: 0.008, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0.945}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4369904940089388111}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &6487346536106404142
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -211,7 +211,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 5861087794156930689, guid: 4389fbfa24dc1d342997ed304933d004, type: 3}
   m_Color: {r: 0.6528301, g: 0.6195727, b: 0.6195727, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -256,17 +256,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.13339537}
+  m_Offset: {x: 0, y: 0.036901236}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.9921875, y: 0.23046875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.8441241}
+  m_Size: {x: 1, y: 0.13650274}
   m_EdgeRadius: 0
 --- !u!1 &8860008576313033364
 GameObject:
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 8517055797132235220}
   - component: {fileID: 7836587457459758111}
   m_Layer: 0
-  m_Name: SpikeTrap
+  m_Name: SpearTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

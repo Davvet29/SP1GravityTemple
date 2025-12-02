@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SpikeTrapScript : MonoBehaviour
+public class SpearTrapScript : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     private AudioSource audio;
