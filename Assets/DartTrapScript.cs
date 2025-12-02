@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 public class DartTrapScript : MonoBehaviour
@@ -9,8 +11,16 @@ public class DartTrapScript : MonoBehaviour
     private Transform dartTransform;
     private float timer;
     [SerializeField] private float startTime = 5;
+    private AudioSource audio;
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
+
     void Start()
     {
+        audio.Play();
         dartTransform = dartPositionObject.transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
         if(spriteRenderer.flipX)
