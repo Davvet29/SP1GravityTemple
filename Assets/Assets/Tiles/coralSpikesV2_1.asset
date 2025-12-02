@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: temple tileset v2_9
+  m_Name: coralSpikesV2_1
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 844104777, guid: 15678384c3593dc4bb19c60dfe043b97, type: 3}
+  m_Sprite: {fileID: -1512995406, guid: 35da8dd0ff142a641b8b94b25c828c0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
