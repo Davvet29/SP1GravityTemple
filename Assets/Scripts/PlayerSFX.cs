@@ -6,6 +6,7 @@ public class PlayerSFX : MonoBehaviour
 {
     private AudioSource audioSource;
     private AudioSource gravitySource;
+
     private bool changedDir;
 
     private void Awake()

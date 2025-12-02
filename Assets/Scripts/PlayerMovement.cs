@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public bool controlEnabled { get; set; } = true; // You can edit this variable from Unity Events
     private Vector2 moveInput;
     private Rigidbody2D rb;
+    private AudioSource landingSource;
 
     // Platformer specific variables
     [SerializeField] private LayerMask groundLayer; // ~0 is referring to EVERY layer. Do you want a specific layer? Serialize the variable and assign the Layer of your choice.
@@ -50,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
+        landingSource = GameObject.Find("LandingSound").GetComponent<AudioSource>();
         Transform transformTop = transform.GetChild(1);
         topCollider = transformTop.GetComponent<Transform>();
         Transform transformBottom = transform.GetChild(2);
@@ -70,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         {
             gravityFlips = 1;
             //touch ground ljud
+            landingSource.Play();
         }
         wasGrounded = isGrounded;
         // Flip sprite according to direction (if a sprite renderer has been assigned)
