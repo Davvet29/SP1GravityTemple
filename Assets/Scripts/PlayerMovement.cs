@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     private float newDir;
     private float oldPos;
     private float oldDir;
+    private float fallStart;
+    private float fallDist;
     private Transform topCollider;
     private Transform bottomCollider;
 
@@ -64,6 +67,11 @@ public class PlayerMovement : MonoBehaviour
         walkAcceleration = 1f;
     }
 
+    private void Start()
+    {
+        fallStart = transform.position.y;
+    }
+
     void Update()
     {
         velocity = TranslateInputToVelocity(moveInput);
@@ -71,8 +79,12 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded == true && wasGrounded != true)
         {
             gravityFlips = 1;
+            
             //touch ground ljud
-            landingSource.Play();
+            float pitch;
+            float volume;
+            
+            PlayLandingSound();
         }
         wasGrounded = isGrounded;
         // Flip sprite according to direction (if a sprite renderer has been assigned)
@@ -96,6 +108,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    
+
     private void FixedUpdate()
     {
         oldDir = newDir;
@@ -229,5 +244,27 @@ public class PlayerMovement : MonoBehaviour
             gravityFlips--;
             gravityFlipped = true;
         }
+    }
+    private void PlayLandingSound()
+    {
+        float pitch;
+        float volume;
+        fallDist = Mathf.Abs(transform.position.y - fallStart);
+        fallStart = transform.position.y;
+            
+        Debug.Log("fallen" + fallDist);
+        if (fallDist <= 4f)
+        {
+            pitch = 0.65f;
+            volume = 0.75f;
+        }
+        else
+        {
+            pitch = 1;
+            volume = 0.9f;
+        }
+        landingSource.volume = volume;
+        landingSource.pitch = pitch;
+        landingSource.Play();
     }
 }
