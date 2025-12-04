@@ -5,13 +5,14 @@ public class DeathScript : MonoBehaviour
 {
     private Transform playerTransform;
     private Transform currentResetPoint;
+    private int currentResetPointIndex = 0;
     [SerializeField] private List<GameObject> resetPoints = new(); 
     void Start()
     {
         resetPoints.AddRange(GameObject.FindGameObjectsWithTag("ResetPoint"));
         Debug.Log(resetPoints.Count);
         playerTransform = GetComponent<Transform>();
-        currentResetPoint = resetPoints[0].transform;
+        currentResetPoint = resetPoints[currentResetPointIndex].transform;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -20,6 +21,12 @@ public class DeathScript : MonoBehaviour
         {
             Debug.Log(currentResetPoint.transform.position);
             playerTransform.position = currentResetPoint.position;
+        }
+
+        if (collision.gameObject.tag == "ResetPoint")
+        {
+            currentResetPointIndex++;
+            
         }
     }
 }
