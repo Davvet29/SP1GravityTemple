@@ -46,6 +46,7 @@ public class DartTrapScript : MonoBehaviour
 
     private void SpawnDart()
     {
+        Debug.Log("Spawning dart");
         GameObject tempdart = Instantiate(dart, dartTransform.position, transform.rotation);
         tempdart.transform.SetParent(transform);
         if(spriteRenderer.flipX)

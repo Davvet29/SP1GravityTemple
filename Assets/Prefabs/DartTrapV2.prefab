@@ -105,7 +105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dart: {fileID: 8054040865936158956, guid: 73a796f01b2553f4c975889c5daabb5a, type: 3}
   dartPositionObject: {fileID: 4595427503247321471}
-  startTime: 5
+  dartInterval: 5
+  offset: 0
 --- !u!61 &1864505421912168221
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,7 +145,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 3.984375}
+    oldSize: {x: 1, y: 0.99609375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -283,7 +284,7 @@ Transform:
   m_GameObject: {fileID: 4595427503247321471}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.241, y: 0.362, z: 0}
+  m_LocalPosition: {x: 0, y: 0.362, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
