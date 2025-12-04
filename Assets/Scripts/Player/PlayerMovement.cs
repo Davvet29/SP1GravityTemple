@@ -92,11 +92,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (moveInput.x > 0.01f)
             {
-                spriteRenderer.flipX = true;
+                spriteRenderer.flipX = false;
             }
             else if (moveInput.x < -0.01f)
             {
-                spriteRenderer.flipX = false;
+                spriteRenderer.flipX = true;
             }
             if (gravityDirection == -1)
             {
