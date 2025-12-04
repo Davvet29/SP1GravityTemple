@@ -18,12 +18,8 @@ public class DartProjectileScript : MonoBehaviour
         {
             transform.RotateAround(transform.position, transform.up, 180f);
         }
-    }
+        rb.linearVelocity = transform.right * speed;
 
-    // Update is called once per frame
-    void Update()
-    {
-        rb.AddForce(transform.right * speed);
     }
 
     void OnTriggerEnter2D(Collider2D collision)

@@ -167,5 +167,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -3126740399493160788}
-  speed: 2
+  speed: 10
   isFlipped: 0
