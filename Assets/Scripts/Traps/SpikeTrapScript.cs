@@ -1,4 +1,3 @@
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class SpikeTrapScript : MonoBehaviour
@@ -7,6 +6,6 @@ public class SpikeTrapScript : MonoBehaviour
 
     public void ActivateTrap()
     {
-        animator.Play("SpikeTrapActive");
+        animator?.Play("SpikeTrapActive");
     }
 }

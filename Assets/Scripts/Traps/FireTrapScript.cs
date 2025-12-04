@@ -37,7 +37,7 @@ public class FireTrapScript : MonoBehaviour
     {
         if (!fireParticleSystem.isPlaying)
         {
-            animator.Play("FireTrapActive");
+            animator?.Play("FireTrapActive");
             
             StartTimer();
         }

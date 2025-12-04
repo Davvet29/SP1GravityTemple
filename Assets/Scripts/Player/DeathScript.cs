@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DeathScript : MonoBehaviour
 {
+    public UnityEvent ReachedEnd;
     private Transform playerTransform;
     private Transform currentResetPoint;
     private int currentResetPointIndex = 0;
@@ -24,6 +26,11 @@ public class DeathScript : MonoBehaviour
         if (collision.gameObject.tag == "ResetPoint")
         {
             currentResetPoint = collision.transform;
+        }
+        if(collision.gameObject.tag == "WinPoint")
+        {
+            currentResetPoint = collision.transform;
+            ReachedEnd.Invoke();
         }
     }
 }
