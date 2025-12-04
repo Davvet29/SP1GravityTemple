@@ -6,14 +6,14 @@ public class FireTrapScript : MonoBehaviour
     private ParticleSystem fireParticleSystem;
     private AudioSource audio;
     private float timer;
-    [SerializeField] private float startTime = 5;
-    [SerializeField] private float startDelay;
+    [SerializeField] private float fireInterval = 5;
+    [SerializeField] private float offset;
     private GameObject fireCollider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        timer = startTime + startDelay;
+        timer = fireInterval + offset;
         fireParticleSystem = GetComponentInChildren<ParticleSystem>();
         audio = GetComponentInChildren<AudioSource>();
         fireCollider = transform.GetChild(1).gameObject;
@@ -50,6 +50,6 @@ public class FireTrapScript : MonoBehaviour
 
     private void StartTimer()
     {
-        timer = startTime;
+        timer = fireInterval;
     }
 }

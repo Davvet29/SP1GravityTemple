@@ -10,7 +10,9 @@ public class DartTrapScript : MonoBehaviour
     [SerializeField] private GameObject dartPositionObject;
     private Transform dartTransform;
     private float timer;
-    [SerializeField] private float startTime = 5;
+    [SerializeField] private float dartInterval = 5;
+    [SerializeField] private float offset;
+
     private AudioSource audio;
 
     private void Awake()
@@ -20,6 +22,7 @@ public class DartTrapScript : MonoBehaviour
 
     void Start()
     {
+        timer = dartInterval + offset;
         audio.Play();
         dartTransform = dartPositionObject.transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -54,6 +57,6 @@ public class DartTrapScript : MonoBehaviour
 
     private void StartTimer()
     {
-        timer = startTime;
+        timer = dartInterval;
     }
 }
