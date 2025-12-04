@@ -28,7 +28,6 @@ public class PlayerSFX : MonoBehaviour
 
     public void PlayGravityFlip()
     {
-        Debug.Log("Playing sound");
         gravitySource.Play();
     }
 }

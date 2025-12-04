@@ -10,7 +10,6 @@ public class DeathScript : MonoBehaviour
     void Start()
     {
         resetPoints.AddRange(GameObject.FindGameObjectsWithTag("ResetPoint"));
-        Debug.Log(resetPoints.Count);
         playerTransform = GetComponent<Transform>();
         currentResetPoint = resetPoints[currentResetPointIndex].transform;
     }
@@ -19,14 +18,12 @@ public class DeathScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            Debug.Log(currentResetPoint.transform.position);
             playerTransform.position = currentResetPoint.position;
         }
 
         if (collision.gameObject.tag == "ResetPoint")
         {
-            currentResetPointIndex++;
-            
+            currentResetPoint = collision.transform;
         }
     }
 }
