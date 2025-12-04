@@ -4,6 +4,7 @@ using UnityEngine;
 public class FireTrapScript : MonoBehaviour
 {
     private ParticleSystem fireParticleSystem;
+    [SerializeField] private Animator animator;
     private AudioSource audio;
     private float timer;
     [SerializeField] private float fireInterval = 5;
@@ -30,21 +31,15 @@ public class FireTrapScript : MonoBehaviour
         {
             StartFlames();
         }
-
-        if(!fireParticleSystem.isPlaying)
-        {
-            fireCollider.SetActive(false);
-        }
     }
 
     private void StartFlames()
     {
         if (!fireParticleSystem.isPlaying)
         {
-            fireParticleSystem.Play();
-            fireCollider.SetActive(true);
+            animator.Play("FireTrapActive");
+            
             StartTimer();
-            audio.Play();
         }
     }
 

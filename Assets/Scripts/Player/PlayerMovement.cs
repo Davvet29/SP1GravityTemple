@@ -122,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
         changedDir = ChangedDirection();
         ApplyGravity();
         rb.linearVelocity = velocity;
+        //resetar 
         if (isMoving)
         {
             animator.SetBool("Walking", true);
@@ -239,7 +240,7 @@ public class PlayerMovement : MonoBehaviour
         if (context.started && controlEnabled && gravityFlips >= 0)
         {
             gravityAcceleration = 1f;
-            velocity.y = 3;
+            velocity.y = 1;
             gravityDirection *= -1;
             gravityFlips--;
             gravityFlipped = true;
@@ -252,7 +253,6 @@ public class PlayerMovement : MonoBehaviour
         fallDist = Mathf.Abs(transform.position.y - fallStart);
         fallStart = transform.position.y;
             
-        Debug.Log("fallen" + fallDist);
         if (fallDist <= 4f)
         {
             pitch = 0.65f;
