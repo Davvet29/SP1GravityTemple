@@ -51,6 +51,9 @@ public class PlayerMovement : MonoBehaviour
     private float fallDist;
     private Transform topCollider;
     private Transform bottomCollider;
+    [SerializeField] private bool quickGravityFlip;
+    [SerializeField] private bool floatyGravity;
+    private bool spacePressedDown;
 
     void Awake()
     {
@@ -113,13 +116,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        oldDir = newDir;
-        oldPos = newPos;
-        newDir = GetDir();
-        newPos = transform.position.x;
+        UpdateDir();
+        UpdatePos();
         isGrounded = IsGrounded();
-        isMoving = IsMoving();
-        changedDir = ChangedDirection();
         ApplyGravity();
         rb.linearVelocity = velocity;
         //resetar 
@@ -134,13 +133,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!isMoving || changedDir)
         {
-            Debug.Log("Velocity 0");
             animator.SetBool("Walking", false);
             velocity.x = 0;
             walkAcceleration = 1f;
         }
         if(gravityFlipped)
         {
+            //sound
             ChangeGravity.Invoke();
         }
         gravityFlipped = false;
@@ -163,9 +162,9 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
     }
-    private bool IsMoving()
+    private bool IsMoving(float _newPos, float _oldPos)
     {
-        if (newPos != oldPos)
+        if (_newPos != _oldPos)
         {
             return true;
         }
@@ -174,25 +173,11 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
     }
-    private void ApplyGravity()
+    private void UpdatePos()
     {
-        // Applies a set gravity for when player is grounded
-        if (isGrounded)
-        {
-            gravityAcceleration = 1f;
-            velocity.y = gravityDirection * -1.0f;
-        }
-        // Updates fall speed with gravity if object isn't grounded
-        else
-        {
-            gravityAcceleration *= gravityCoefficient;
-            if (gravityAcceleration >= maxGravityAcceleration)
-            {
-                gravityAcceleration = maxGravityAcceleration;
-            }
-            velocity.y += gravityDirection * (Physics2D.gravity.y * gravityAcceleration * Time.deltaTime);
-            velocity.y = Mathf.Clamp(velocity.y,-60, 60);
-        }
+        oldPos = newPos;
+        newPos = transform.position.x;
+        isMoving = IsMoving(oldPos, newPos);
     }
     private float GetDir()
     {
@@ -205,9 +190,16 @@ public class PlayerMovement : MonoBehaviour
             return -1;
         }
     }
-    private bool ChangedDirection()
+
+    private void UpdateDir()
     {
-        if (newDir != oldDir)
+        oldDir = newDir;
+        newDir = GetDir();
+        changedDir = ChangedDirection(oldDir, newDir);
+    }
+    private bool ChangedDirection(float _newDir, float _oldDir)
+    {
+        if (_newDir != _oldDir)
         {
             return true;
         }
@@ -216,6 +208,46 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
     }
+
+    private void ApplyGravity()
+    {
+        // Applies a set gravity for when player is grounded
+        if (isGrounded)
+        {
+            gravityCoefficient = 1.2f;
+            gravityAcceleration = 1f;
+            velocity.y = gravityDirection * -1.0f;
+        }
+        // Updates fall speed with gravity if object isn't grounded
+        else
+        {
+            UpdateCoefficient();
+            gravityAcceleration *= gravityCoefficient;
+            if (gravityAcceleration >= maxGravityAcceleration)
+            {
+                gravityAcceleration = maxGravityAcceleration;
+            }
+
+            SetVelocity();
+        }
+    }
+    private void UpdateCoefficient()
+    {
+            if(spacePressedDown && gravityCoefficient <= 1.2f)
+            {
+                gravityCoefficient+= 0.0007f;
+            }
+            else if(!spacePressedDown && gravityCoefficient != 1.2f)
+            {
+                gravityCoefficient = 1.2f;
+            }
+    }
+    private void SetVelocity()
+    {
+        velocity.y += gravityDirection * (Physics2D.gravity.y * gravityAcceleration * Time.deltaTime);
+        velocity.y = Mathf.Clamp(velocity.y,-60, 60);
+    }
+
     Vector2 TranslateInputToVelocity(Vector2 input)
     {
         // Make the character move along the X-axis
@@ -240,11 +272,28 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.started && controlEnabled && gravityFlips >= 0)
         {
-            gravityAcceleration = 1f;
+
+            if(quickGravityFlip && isGrounded)
+            {
+                gravityAcceleration = 3f;
+            }
+            else
+            {
+                gravityAcceleration = 1f;
+            }
+            if(floatyGravity && !isGrounded)
+            {
+                gravityCoefficient = 1f;
+            }
             velocity.y = 1;
             gravityDirection *= -1;
             gravityFlips--;
             gravityFlipped = true;
+            spacePressedDown = true;
+        }
+        if(context.canceled)
+        {
+            spacePressedDown = false;
         }
     }
     private void PlayLandingSound()
