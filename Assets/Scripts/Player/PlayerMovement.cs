@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
+    
     
 
     private void FixedUpdate()
@@ -134,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!isMoving || changedDir)
         {
+            Debug.Log("Velocity 0");
             animator.SetBool("Walking", false);
             velocity.x = 0;
             walkAcceleration = 1f;
