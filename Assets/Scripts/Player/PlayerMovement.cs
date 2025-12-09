@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Rigidbody2D rb;
     private AudioSource landingSource;
+    private ParticleSystem particles;
 
     // Platformer specific variables
     [SerializeField] private LayerMask groundLayer; // ~0 is referring to EVERY layer. Do you want a specific layer? Serialize the variable and assign the Layer of your choice.
@@ -57,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
+        particles = GetComponentInChildren<ParticleSystem>();
         landingSource = GameObject.Find("LandingSound").GetComponent<AudioSource>();
         Transform transformTop = transform.GetChild(1);
         topCollider = transformTop.GetComponent<Transform>();
@@ -298,6 +300,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void PlayLandingSound()
     {
+        particles.Play();
+        
         float pitch;
         float volume;
         fallDist = Mathf.Abs(transform.position.y - fallStart);
