@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ce3489c659a36ab46b30f1878e474ec1
+guid: 172fc7060cceb4f488c8d6ec7020a013
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5412266013421111813
-    second: circle particle_0
+      213: -5722526208854742031
+    second: puppledadLight_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: circle particle_0
+      name: puppledadLight_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 50a82e7834b3c1b40800000000000000
-      internalID: 5412266013421111813
+      spriteID: 1fba9577bb08590b0800000000000000
+      internalID: -5722526208854742031
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      circle particle_0: 5412266013421111813
+      puppledadLight_0: -5722526208854742031
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
