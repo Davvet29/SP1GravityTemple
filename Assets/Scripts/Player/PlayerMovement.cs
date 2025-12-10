@@ -50,7 +50,9 @@ public class PlayerMovement : MonoBehaviour
     private float oldDir;
     private float fallStart;
     private float fallDist;
+    [SerializeField] private GameObject tempTop;
     private Transform topCollider;
+    [SerializeField] private GameObject tempBottom;
     private Transform bottomCollider;
     [SerializeField] private bool quickGravityFlip;
     [SerializeField] private bool floatyGravity;
@@ -60,10 +62,8 @@ public class PlayerMovement : MonoBehaviour
     {
         particles = GetComponentsInChildren<ParticleSystem>();
         landingSource = GameObject.Find("LandingSound").GetComponent<AudioSource>();
-        Transform transformTop = transform.GetChild(1);
-        topCollider = transformTop.GetComponent<Transform>();
-        Transform transformBottom = transform.GetChild(2);
-        bottomCollider = transformBottom.GetComponent<Transform>();
+        topCollider = tempTop.GetComponent<Transform>();
+        bottomCollider = tempBottom.GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         // Set gravity scale to 0 so player won't "fall"
         rb.gravityScale = 0;
@@ -237,7 +237,7 @@ public class PlayerMovement : MonoBehaviour
     {
             if(spacePressedDown && gravityCoefficient <= 1.2f)
             {
-                gravityCoefficient+= 0.0007f;
+                gravityCoefficient+= 0.007f;
             }
             else if(!spacePressedDown && gravityCoefficient != 1.2f)
             {
