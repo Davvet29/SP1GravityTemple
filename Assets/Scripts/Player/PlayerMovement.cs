@@ -304,17 +304,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (gravityDirection == -1)
         {
-            Debug.Log("played topparticles");
             foreach (ParticleSystem ps in topParticles)
             {
+                Debug.Log("played topparticles");
                 ps.Play();
             }
         }
         else if (gravityDirection == 1)
         {
-            Debug.Log("played BOTparticles");
             foreach (ParticleSystem ps in botParticles)
             {
+                Debug.Log("played BOTparticles");
                 ps.Play();
             } 
         }
