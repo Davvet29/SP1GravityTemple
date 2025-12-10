@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
 // The following components are also needed: Player Input
 // Gravity for the project is set in Unity at Edit -> Project Settings -> Physics2D -> Gravity Y
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
     public bool controlEnabled { get; set; } = true; // You can edit this variable from Unity Events
     private Vector2 moveInput;
     private Rigidbody2D rb;
@@ -21,28 +21,46 @@ public class PlayerMovement : MonoBehaviour
     private ParticleSystem[] botParticles = new ParticleSystem[2];
 
     // Platformer specific variables
-    [SerializeField] private LayerMask groundLayer; // ~0 is referring to EVERY layer. Do you want a specific layer? Serialize the variable and assign the Layer of your choice.
+    [SerializeField]
+    private LayerMask groundLayer; // ~0 is referring to EVERY layer. Do you want a specific layer? Serialize the variable and assign the Layer of your choice.
     private bool wasGrounded;
     private bool isGrounded;
     private bool isMoving;
-    [SerializeField] public bool changedDir;
-    [SerializeField] private Animator animator;
-    
+
+    [SerializeField]
+    public bool changedDir;
+
+    [SerializeField]
+    private Animator animator;
+
     //gravity
     private int gravityDirection = 1;
     private int gravityFlips = 1;
     private bool gravityFlipped;
-    [SerializeField] private float gravityAcceleration = 1f;
-    [SerializeField] private float gravityCoefficient = 1.2f;
-    [SerializeField] private float maxGravityAcceleration = 10f;
+
+    [SerializeField]
+    private float gravityAcceleration = 1f;
+
+    [SerializeField]
+    private float gravityCoefficient = 1.2f;
+
+    [SerializeField]
+    private float maxGravityAcceleration = 10f;
 
     public UnityEvent ChangeGravity;
 
     //walking
-    [SerializeField] private float walkAcceleration = 1f;
-    [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private float maxAcceleration = 10f;
-    [SerializeField] private float walkCoefficient = 1.05f;
+    [SerializeField]
+    private float walkAcceleration = 1f;
+
+    [SerializeField]
+    private float maxSpeed = 10f;
+
+    [SerializeField]
+    private float maxAcceleration = 10f;
+
+    [SerializeField]
+    private float walkCoefficient = 1.05f;
     private Vector2 velocity;
 
     private float newPos;
@@ -53,19 +71,25 @@ public class PlayerMovement : MonoBehaviour
     private float fallDist;
     private Transform topCollider;
     private Transform bottomCollider;
-    [SerializeField] private bool quickGravityFlip;
-    [SerializeField] private bool floatyGravity;
+
+    [SerializeField]
+    private bool quickGravityFlip;
+
+    [SerializeField]
+    private bool floatyGravity;
     private bool spacePressedDown;
 
     void Awake()
     {
-        topParticles = GameObject.Find("TopLandingParticles").GetComponentsInChildren<ParticleSystem>();
-        botParticles = GameObject.Find("BotLandingParticles").GetComponentsInChildren<ParticleSystem>();
+        topParticles = GameObject
+            .Find("TopLandingParticles")
+            .GetComponentsInChildren<ParticleSystem>();
+        botParticles = GameObject
+            .Find("BotLandingParticles")
+            .GetComponentsInChildren<ParticleSystem>();
         landingSource = GameObject.Find("LandingSound").GetComponent<AudioSource>();
-        Transform transformTop = transform.GetChild(1);
-        topCollider = transformTop.GetComponent<Transform>();
-        Transform transformBottom = transform.GetChild(2);
-        bottomCollider = transformBottom.GetComponent<Transform>();
+        topCollider = GameObject.Find("TopCollider").GetComponent<Transform>();
+        bottomCollider = GameObject.Find("BottomCollider").GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         // Set gravity scale to 0 so player won't "fall"
         rb.gravityScale = 0;
@@ -86,11 +110,11 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded == true && wasGrounded != true)
         {
             gravityFlips = 1;
-            
+
             //touch ground ljud
             float pitch;
             float volume;
-            
+
             PlayLandingSound();
         }
         wasGrounded = isGrounded;
@@ -115,8 +139,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    
-    
 
     private void FixedUpdate()
     {
@@ -125,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = IsGrounded();
         ApplyGravity();
         rb.linearVelocity = velocity;
-        //resetar 
+        //resetar
         if (isMoving)
         {
             animator.SetBool("Walking", true);
@@ -141,17 +163,19 @@ public class PlayerMovement : MonoBehaviour
             velocity.x = 0;
             walkAcceleration = 1f;
         }
-        if(gravityFlipped)
+        if (gravityFlipped)
         {
             //sound
             ChangeGravity.Invoke();
         }
         gravityFlipped = false;
     }
+
     private bool LayerCollider(Transform colliderTransform)
     {
         return Physics2D.OverlapCircle(colliderTransform.position, 0.05f, groundLayer);
     }
+
     private bool IsGrounded()
     {
         if (
@@ -159,13 +183,16 @@ public class PlayerMovement : MonoBehaviour
             || (gravityDirection == -1 && LayerCollider(topCollider))
         )
         {
+            Debug.Log("Isgrounded");
             return true;
         }
         else
         {
+            Debug.Log("NOTgrounded");
             return false;
         }
     }
+
     private bool IsMoving(float _newPos, float _oldPos)
     {
         if (_newPos != _oldPos)
@@ -177,12 +204,14 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
     }
+
     private void UpdatePos()
     {
         oldPos = newPos;
         newPos = transform.position.x;
         isMoving = IsMoving(oldPos, newPos);
     }
+
     private float GetDir()
     {
         if (velocity.x > 0)
@@ -201,6 +230,7 @@ public class PlayerMovement : MonoBehaviour
         newDir = GetDir();
         changedDir = ChangedDirection(oldDir, newDir);
     }
+
     private bool ChangedDirection(float _newDir, float _oldDir)
     {
         if (_newDir != _oldDir)
@@ -235,21 +265,24 @@ public class PlayerMovement : MonoBehaviour
             SetVelocity();
         }
     }
+
     private void UpdateCoefficient()
     {
-            if(spacePressedDown && gravityCoefficient <= 1.2f)
-            {
-                gravityCoefficient+= 0.007f;
-            }
-            else if(!spacePressedDown && gravityCoefficient != 1.2f)
-            {
-                gravityCoefficient = 1.2f;
-            }
+        if (spacePressedDown && gravityCoefficient <= 1.2f)
+        {
+            gravityCoefficient += 0.007f;
+        }
+        else if (!spacePressedDown && gravityCoefficient != 1.2f)
+        {
+            gravityCoefficient = 1.2f;
+        }
     }
+
     private void SetVelocity()
     {
-        velocity.y += gravityDirection * (Physics2D.gravity.y * gravityAcceleration * Time.deltaTime);
-        velocity.y = Mathf.Clamp(velocity.y,-60, 60);
+        velocity.y +=
+            gravityDirection * (Physics2D.gravity.y * gravityAcceleration * Time.deltaTime);
+        velocity.y = Mathf.Clamp(velocity.y, -60, 60);
     }
 
     Vector2 TranslateInputToVelocity(Vector2 input)
@@ -257,6 +290,7 @@ public class PlayerMovement : MonoBehaviour
         // Make the character move along the X-axis
         return new Vector2(input.x * maxSpeed * (walkAcceleration / 2), velocity.y);
     }
+
     // Handle Move-input
     // This method can be triggered through the UnityEvent in PlayerInput
     public void OnMove(InputAction.CallbackContext context)
@@ -270,14 +304,14 @@ public class PlayerMovement : MonoBehaviour
             moveInput = Vector2.zero;
         }
     }
+
     // Handle Jump-input
     // This method can be triggered through the UnityEvent in PlayerInput
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started && controlEnabled && gravityFlips >= 0)
         {
-
-            if(quickGravityFlip && isGrounded)
+            if (quickGravityFlip && isGrounded)
             {
                 gravityAcceleration = 3f;
             }
@@ -285,7 +319,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 gravityAcceleration = 1f;
             }
-            if(floatyGravity && !isGrounded)
+            if (floatyGravity && !isGrounded)
             {
                 gravityCoefficient = 1f;
             }
@@ -295,18 +329,18 @@ public class PlayerMovement : MonoBehaviour
             gravityFlipped = true;
             spacePressedDown = true;
         }
-        if(context.canceled)
+        if (context.canceled)
         {
             spacePressedDown = false;
         }
     }
+
     private void PlayLandingSound()
     {
         if (gravityDirection == -1)
         {
             foreach (ParticleSystem ps in topParticles)
             {
-                Debug.Log("played topparticles");
                 ps.Play();
             }
         }
@@ -314,16 +348,15 @@ public class PlayerMovement : MonoBehaviour
         {
             foreach (ParticleSystem ps in botParticles)
             {
-                Debug.Log("played BOTparticles");
                 ps.Play();
-            } 
+            }
         }
-        
+
         float pitch;
         float volume;
         fallDist = Mathf.Abs(transform.position.y - fallStart);
         fallStart = transform.position.y;
-            
+
         if (fallDist <= 4f)
         {
             pitch = 0.65f;
