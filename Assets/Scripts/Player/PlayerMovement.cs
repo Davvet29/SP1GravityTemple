@@ -300,10 +300,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void PlayLandingSound()
     {
-        /*foreach (ParticleSystem ps in particles)
+        foreach (ParticleSystem ps in particles)
         {
+            Debug.Log("Playing Particles");
             ps.Play();
-        }*/
+        }
         
         float pitch;
         float volume;
