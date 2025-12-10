@@ -239,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
     {
             if(spacePressedDown && gravityCoefficient <= 1.2f)
             {
-                gravityCoefficient+= 0.0007f;
+                gravityCoefficient+= 0.007f;
             }
             else if(!spacePressedDown && gravityCoefficient != 1.2f)
             {
