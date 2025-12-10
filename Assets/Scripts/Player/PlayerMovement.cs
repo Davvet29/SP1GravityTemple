@@ -302,7 +302,6 @@ public class PlayerMovement : MonoBehaviour
     {
         foreach (ParticleSystem ps in particles)
         {
-            Debug.Log("Playing Particles");
             ps.Play();
         }
         
