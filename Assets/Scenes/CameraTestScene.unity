@@ -1790,7 +1790,7 @@ MonoBehaviour:
     DefaultMode: 2
   DefaultBlend:
     Style: 1
-    Time: 2
+    Time: 1
     CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -42106,6 +42106,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1954473334}
     m_Modifications:
+    - target: {fileID: 4131823526052338069, guid: 267ac6075898bf040aa5e993ec8f3e5c, type: 3}
+      propertyPath: Composition.DeadZone.Size.x
+      value: 0.14625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131823526052338069, guid: 267ac6075898bf040aa5e993ec8f3e5c, type: 3}
+      propertyPath: Composition.DeadZone.Size.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131823526052338069, guid: 267ac6075898bf040aa5e993ec8f3e5c, type: 3}
+      propertyPath: Composition.DeadZone.Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4828474739606127266, guid: 267ac6075898bf040aa5e993ec8f3e5c, type: 3}
       propertyPath: m_Name
       value: CM VCam2
@@ -44803,6 +44815,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1954473334}
     m_Modifications:
+    - target: {fileID: 4131823526052338069, guid: 267ac6075898bf040aa5e993ec8f3e5c, type: 3}
+      propertyPath: TargetOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131823526052338069, guid: 267ac6075898bf040aa5e993ec8f3e5c, type: 3}
+      propertyPath: Composition.DeadZone.Size.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131823526052338069, guid: 267ac6075898bf040aa5e993ec8f3e5c, type: 3}
+      propertyPath: Composition.ScreenPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131823526052338069, guid: 267ac6075898bf040aa5e993ec8f3e5c, type: 3}
+      propertyPath: Composition.ScreenPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5396452132347685363, guid: 267ac6075898bf040aa5e993ec8f3e5c, type: 3}
       propertyPath: Priority.Enabled
       value: 0
