@@ -17,7 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Rigidbody2D rb;
     private AudioSource landingSource;
-    private ParticleSystem[] particles = new ParticleSystem[2];
+    private ParticleSystem[] topParticles = new ParticleSystem[2];
+    private ParticleSystem[] botParticles = new ParticleSystem[2];
 
     // Platformer specific variables
     [SerializeField] private LayerMask groundLayer; // ~0 is referring to EVERY layer. Do you want a specific layer? Serialize the variable and assign the Layer of your choice.
@@ -50,9 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private float oldDir;
     private float fallStart;
     private float fallDist;
-    [SerializeField] private GameObject tempTop;
     private Transform topCollider;
-    [SerializeField] private GameObject tempBottom;
     private Transform bottomCollider;
     [SerializeField] private bool quickGravityFlip;
     [SerializeField] private bool floatyGravity;
@@ -60,10 +59,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        particles = GetComponentsInChildren<ParticleSystem>();
+        topParticles = GameObject.Find("TopLandingParticles").GetComponentsInChildren<ParticleSystem>();
+        botParticles = GameObject.Find("BotLandingParticles").GetComponentsInChildren<ParticleSystem>();
         landingSource = GameObject.Find("LandingSound").GetComponent<AudioSource>();
-        topCollider = tempTop.GetComponent<Transform>();
-        bottomCollider = tempBottom.GetComponent<Transform>();
+        Transform transformTop = transform.GetChild(1);
+        topCollider = transformTop.GetComponent<Transform>();
+        Transform transformBottom = transform.GetChild(2);
+        bottomCollider = transformBottom.GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         // Set gravity scale to 0 so player won't "fall"
         rb.gravityScale = 0;
@@ -237,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
     {
             if(spacePressedDown && gravityCoefficient <= 1.2f)
             {
-                gravityCoefficient+= 0.007f;
+                gravityCoefficient+= 0.0007f;
             }
             else if(!spacePressedDown && gravityCoefficient != 1.2f)
             {
@@ -300,10 +302,21 @@ public class PlayerMovement : MonoBehaviour
     }
     private void PlayLandingSound()
     {
-        foreach (ParticleSystem ps in particles)
+        if (gravityDirection == -1)
         {
-            Debug.Log("Playing Particles");
-            ps.Play();
+            Debug.Log("played topparticles");
+            foreach (ParticleSystem ps in topParticles)
+            {
+                ps.Play();
+            }
+        }
+        else if (gravityDirection == 1)
+        {
+            Debug.Log("played BOTparticles");
+            foreach (ParticleSystem ps in botParticles)
+            {
+                ps.Play();
+            } 
         }
         
         float pitch;
