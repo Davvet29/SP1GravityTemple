@@ -6,6 +6,7 @@ public class FireTrapScript : MonoBehaviour
     private ParticleSystem fireParticleSystem;
     [SerializeField] private Animator animator;
     private AudioSource audio;
+    static float audioTimer;
     private float timer;
     [SerializeField] private float fireInterval = 5;
     [SerializeField] private float offset;
@@ -16,7 +17,7 @@ public class FireTrapScript : MonoBehaviour
     {
         timer = fireInterval + offset;
         fireParticleSystem = GetComponentInChildren<ParticleSystem>();
-        audio = GetComponentInChildren<AudioSource>();
+        audio = GetComponent<AudioSource>();
         fireCollider = transform.GetChild(1).gameObject;
     }
 
@@ -30,6 +31,7 @@ public class FireTrapScript : MonoBehaviour
         else
         {
             StartFlames();
+            PlaySound();
         }
     }
 
@@ -37,8 +39,6 @@ public class FireTrapScript : MonoBehaviour
     {
         if (!fireParticleSystem.isPlaying)
         {
-            animator?.Play("FireTrapActive");
-            
             StartTimer();
         }
     }
@@ -46,5 +46,14 @@ public class FireTrapScript : MonoBehaviour
     private void StartTimer()
     {
         timer = fireInterval;
+    }
+    private void PlaySound()
+    {
+        animator?.Play("FireTrapActive");
+        if (Time.time - FireTrapScript.audioTimer > 0.005f)
+        {
+            audio.Play();
+            FireTrapScript.audioTimer =  Time.time;
+        }
     }
 }
