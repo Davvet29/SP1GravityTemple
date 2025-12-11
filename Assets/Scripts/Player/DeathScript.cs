@@ -29,6 +29,7 @@ public class DeathScript : MonoBehaviour
         }
         if(collision.gameObject.tag == "WinPoint")
         {
+            
             currentResetPoint = collision.transform;
             ReachedEnd.Invoke();
         }

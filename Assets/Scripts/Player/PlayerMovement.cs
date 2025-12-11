@@ -4,19 +4,12 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
-/////////////// INFORMATION ///////////////
-// This script automatically adds a Rigidbody2D, CapsuleCollider2D and CircleCollider2D component in the inspector.
-// The Rigidbody2D component should (probably) have some constraints: Freeze Rotation Z
-// The Circle Collider 2D should be set to "is trigger", resized and moved to a proper position for ground check.
-// The following components are also needed: Player Input
-// Gravity for the project is set in Unity at Edit -> Project Settings -> Physics2D -> Gravity Y
 {
     [SerializeField]
     private SpriteRenderer spriteRenderer;
     public bool controlEnabled { get; set; } = true; // You can edit this variable from Unity Events
     private Vector2 moveInput;
     private Rigidbody2D rb;
-    private AudioSource landingSource;
     private ParticleSystem[] topParticles = new ParticleSystem[2];
     private ParticleSystem[] botParticles = new ParticleSystem[2];
 
@@ -26,11 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private bool wasGrounded;
     private bool isGrounded;
     private bool isMoving;
-
-    [SerializeField]
     public bool changedDir;
-
-    [SerializeField]
     private Animator animator;
 
     //gravity
@@ -64,8 +53,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 velocity;
 
     private float newPos;
-    private float newDir;
     private float oldPos;
+    private float newDir;
     private float oldDir;
     private float fallStart;
     private float fallDist;
@@ -79,8 +68,14 @@ public class PlayerMovement : MonoBehaviour
     private bool floatyGravity;
     private bool spacePressedDown;
 
+    //Audio
+    private AudioSource landingSource;
+    private float pitch;
+    private float volume;
+
     void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         topParticles = GameObject
             .Find("TopLandingParticles")
             .GetComponentsInChildren<ParticleSystem>();
@@ -91,18 +86,13 @@ public class PlayerMovement : MonoBehaviour
         topCollider = GameObject.Find("TopCollider").GetComponent<Transform>();
         bottomCollider = GameObject.Find("BottomCollider").GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
-        // Set gravity scale to 0 so player won't "fall"
-        rb.gravityScale = 0;
         animator = GetComponent<Animator>();
+
+        rb.gravityScale = 0;
         newPos = transform.position.x;
         walkAcceleration = 1f;
-    }
-
-    private void Start()
-    {
         fallStart = transform.position.y;
     }
-
     void Update()
     {
         velocity = TranslateInputToVelocity(moveInput);
@@ -111,32 +101,26 @@ public class PlayerMovement : MonoBehaviour
         {
             gravityFlips = 1;
 
-            //touch ground ljud
-            float pitch;
-            float volume;
-
             PlayLandingSound();
+            PlayLandingParticles();
         }
         wasGrounded = isGrounded;
         // Flip sprite according to direction (if a sprite renderer has been assigned)
-        if (spriteRenderer)
+        if (moveInput.x > 0.01f)
         {
-            if (moveInput.x > 0.01f)
-            {
-                spriteRenderer.flipX = false;
-            }
-            else if (moveInput.x < -0.01f)
-            {
-                spriteRenderer.flipX = true;
-            }
-            if (gravityDirection == -1)
-            {
-                spriteRenderer.flipY = true;
-            }
-            else
-            {
-                spriteRenderer.flipY = false;
-            }
+            spriteRenderer.flipX = false;
+        }
+        else if (moveInput.x < -0.01f)
+        {
+            spriteRenderer.flipX = true;
+        }
+        if (gravityDirection == -1)
+        {
+            spriteRenderer.flipY = true;
+        }
+        else if (gravityDirection == 1)
+        {
+            spriteRenderer.flipY = false;
         }
     }
 
@@ -147,7 +131,8 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = IsGrounded();
         ApplyGravity();
         rb.linearVelocity = velocity;
-        //resetar
+
+
         if (isMoving)
         {
             animator.SetBool("Walking", true);
@@ -183,12 +168,10 @@ public class PlayerMovement : MonoBehaviour
             || (gravityDirection == -1 && LayerCollider(topCollider))
         )
         {
-            Debug.Log("Isgrounded");
             return true;
         }
         else
         {
-            Debug.Log("NOTgrounded");
             return false;
         }
     }
@@ -337,23 +320,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayLandingSound()
     {
-        if (gravityDirection == -1)
-        {
-            foreach (ParticleSystem ps in topParticles)
-            {
-                ps.Play();
-            }
-        }
-        else if (gravityDirection == 1)
-        {
-            foreach (ParticleSystem ps in botParticles)
-            {
-                ps.Play();
-            }
-        }
-
-        float pitch;
-        float volume;
         fallDist = Mathf.Abs(transform.position.y - fallStart);
         fallStart = transform.position.y;
 
@@ -370,5 +336,22 @@ public class PlayerMovement : MonoBehaviour
         landingSource.volume = volume;
         landingSource.pitch = pitch;
         landingSource.Play();
+    }
+    private void PlayLandingParticles()
+    {
+        if (gravityDirection == -1)
+        {
+            foreach (ParticleSystem ps in topParticles)
+            {
+                ps.Play();
+            }
+        }
+        else if (gravityDirection == 1)
+        {
+            foreach (ParticleSystem ps in botParticles)
+            {
+                ps.Play();
+            }
+        }
     }
 }
