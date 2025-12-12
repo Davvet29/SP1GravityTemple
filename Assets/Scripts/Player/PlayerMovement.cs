@@ -130,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
         UpdatePos();
         isGrounded = IsGrounded();
         ApplyGravity();
+        
         rb.linearVelocity = velocity;
 
 
@@ -154,6 +155,11 @@ public class PlayerMovement : MonoBehaviour
             ChangeGravity.Invoke();
         }
         gravityFlipped = false;
+
+        if(newPos-oldPos < 0.02f * Time.deltaTime)
+        {
+            newPos = oldPos;
+        }
     }
 
     private bool LayerCollider(Transform colliderTransform)

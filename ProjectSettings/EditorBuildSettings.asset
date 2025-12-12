@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Acually spelet/StartScene.unity
     guid: 1d4c2c7de6fbb5948b053c51d9fbcd94
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameScene.unity
     guid: 515fb5dad297aef4f967c43f1feb226f
+  - enabled: 1
+    path: Assets/Scenes/CameraTestScene.unity
+    guid: 2255d5e2e34fb7844a0efb9d16734ce8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
