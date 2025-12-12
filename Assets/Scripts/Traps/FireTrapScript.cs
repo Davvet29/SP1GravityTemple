@@ -10,6 +10,7 @@ public class FireTrapScript : MonoBehaviour
     private float timer;
     [SerializeField] private float fireInterval = 5;
     [SerializeField] private float offset;
+    [SerializeField] private float soundwait = 0.01f;
     private GameObject fireCollider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,9 +51,10 @@ public class FireTrapScript : MonoBehaviour
     private void PlaySound()
     {
         animator?.Play("FireTrapActive");
-        if (Time.time - FireTrapScript.audioTimer > 0.005f)
+        if (Time.time - FireTrapScript.audioTimer > soundwait)
         {
             audio.Play();
+            
             FireTrapScript.audioTimer =  Time.time;
         }
     }

@@ -125158,6 +125158,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2266859229731983019, guid: adea9f6a6af695d4e9ae0ed313ea664b, type: 3}
+      propertyPath: soundOffset
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 8739159936538770622, guid: adea9f6a6af695d4e9ae0ed313ea664b, type: 3}
       propertyPath: m_Name
       value: FireTrap
