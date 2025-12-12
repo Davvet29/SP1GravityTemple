@@ -55,7 +55,9 @@ public class FireTrapScript : MonoBehaviour
         {
             audio.Play();
             
-            FireTrapScript.audioTimer =  Time.time;
+            if(audio.time == 0.1f){
+                FireTrapScript.audioTimer =  Time.time;
+            }
         }
     }
 }

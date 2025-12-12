@@ -5104,7 +5104,7 @@ MonoBehaviour:
   animator: {fileID: 2728218002256777062}
   fireInterval: 5
   offset: 0
-  soundOffset: 0
+  soundwait: 0.01
 --- !u!61 &8635936033962611838
 BoxCollider2D:
   m_ObjectHideFlags: 0
