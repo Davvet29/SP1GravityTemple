@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     private SpriteRenderer spriteRenderer;
-    public bool controlEnabled { get; set; } = true; // You can edit this variable from Unity Events
+    public bool controlEnabled { get; set; } = true;
     private Vector2 moveInput;
     private Rigidbody2D rb;
     private ParticleSystem[] topParticles = new ParticleSystem[2];
@@ -15,11 +15,13 @@ public class PlayerMovement : MonoBehaviour
 
     // Platformer specific variables
     [SerializeField]
-    private LayerMask groundLayer; // ~0 is referring to EVERY layer. Do you want a specific layer? Serialize the variable and assign the Layer of your choice.
+    private LayerMask groundLayer;
     private bool wasGrounded;
-    private bool isGrounded;
+
+    [SerializeField]
+    public bool isGrounded;
     private bool isMoving;
-    public bool changedDir;
+    private bool changedDir;
     private Animator animator;
 
     //gravity
@@ -58,8 +60,6 @@ public class PlayerMovement : MonoBehaviour
     private float oldDir;
     private float fallStart;
     private float fallDist;
-    private Transform topCollider;
-    private Transform bottomCollider;
 
     [SerializeField]
     private bool quickGravityFlip;
@@ -73,6 +73,8 @@ public class PlayerMovement : MonoBehaviour
     private float pitch;
     private float volume;
 
+    private float playerHalfHeight;
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -83,8 +85,6 @@ public class PlayerMovement : MonoBehaviour
             .Find("BotLandingParticles")
             .GetComponentsInChildren<ParticleSystem>();
         landingSource = GameObject.Find("LandingSound").GetComponent<AudioSource>();
-        topCollider = GameObject.Find("TopCollider").GetComponent<Transform>();
-        bottomCollider = GameObject.Find("BottomCollider").GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
@@ -92,7 +92,10 @@ public class PlayerMovement : MonoBehaviour
         newPos = transform.position.x;
         walkAcceleration = 1f;
         fallStart = transform.position.y;
+
+        playerHalfHeight = spriteRenderer.bounds.extents.y;
     }
+
     void Update()
     {
         velocity = TranslateInputToVelocity(moveInput);
@@ -130,9 +133,8 @@ public class PlayerMovement : MonoBehaviour
         UpdatePos();
         isGrounded = IsGrounded();
         ApplyGravity();
-        
-        rb.linearVelocity = velocity;
 
+        rb.linearVelocity = velocity;
 
         if (isMoving)
         {
@@ -156,23 +158,39 @@ public class PlayerMovement : MonoBehaviour
         }
         gravityFlipped = false;
 
-        if(newPos-oldPos < 0.02f * Time.deltaTime)
+        if (newPos - oldPos < 0.02f * Time.deltaTime)
         {
             newPos = oldPos;
         }
     }
 
-    private bool LayerCollider(Transform colliderTransform)
+    private bool LayerCollider()
     {
-        return Physics2D.OverlapCircle(colliderTransform.position, 0.05f, groundLayer);
+        if (gravityDirection == 1)
+        {
+            //bottom
+            return Physics2D.Raycast(
+                transform.position,
+                -Vector2.up,
+                playerHalfHeight + 0.1f,
+                groundLayer
+            );
+        }
+        else
+        {
+            //top
+            return Physics2D.Raycast(
+                transform.position,
+                Vector2.up,
+                playerHalfHeight + 0.1f,
+                groundLayer
+            );
+        }
     }
 
     private bool IsGrounded()
     {
-        if (
-            (gravityDirection == 1 && LayerCollider(bottomCollider))
-            || (gravityDirection == -1 && LayerCollider(topCollider))
-        )
+        if (LayerCollider() == true)
         {
             return true;
         }
@@ -343,6 +361,7 @@ public class PlayerMovement : MonoBehaviour
         landingSource.pitch = pitch;
         landingSource.Play();
     }
+
     private void PlayLandingParticles()
     {
         if (gravityDirection == -1)

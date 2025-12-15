@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1cc9645cc30a67c4dba241a713c98ec5
+guid: 6807e73d9f609d5409048298b89a584e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8094351751647592052
-    second: coralSpikesV1_0
+      213: -6602303259318180497
+    second: coralSpikesLightV2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: coralSpikesV1_0
+      name: coralSpikesLightV2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,14 +115,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c810cf3b7f51baf80800000000000000
-      internalID: -8094351751647592052
+      spriteID: f65afe88a28ef54a0800000000000000
+      internalID: -6602303259318180497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: coralSpikesV1_1
+      name: coralSpikesLightV2_1
       rect:
         serializedVersion: 2
         x: 256
@@ -137,8 +137,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 864bbd890caabca4daf3661e12e57a90
-      internalID: -672664800
+      spriteID: 2cdc84965586ad047b7d3e4f46bd472a
+      internalID: 1134295936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coralSpikesLightV2_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fe0d0b8b7bd3b84ab6c835ca0999a03
+      internalID: 1669078854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coralSpikesLightV2_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7ee95ba32ab9a742a60cedd710c874a
+      internalID: -741614905
       vertices: []
       indices: 
       edges: []
@@ -147,7 +191,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cba1a8a20421cfb42a6a65c9f7355cf0
+    spriteID: cd350af0f13c42149891ad6173067715
     internalID: 0
     vertices: []
     indices: 
@@ -157,8 +201,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      coralSpikesV1_0: -8094351751647592052
-      coralSpikesV1_1: -672664800
+      coralSpikesLightV2_0: -6602303259318180497
+      coralSpikesLightV2_1: 1134295936
+      coralSpikesLightV2_2: 1669078854
+      coralSpikesLightV2_3: -741614905
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
