@@ -6,6 +6,7 @@ public class PlayerSFX : MonoBehaviour
 {
     private AudioSource audioSource;
     private AudioSource gravitySource;
+    private AudioSource checkPointSource;
 
     private bool changedDir;
 
@@ -13,13 +14,14 @@ public class PlayerSFX : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         gravitySource = GameObject.Find("GravitySound").GetComponent<AudioSource>();
+        checkPointSource = GameObject.Find("CheckpointSound").GetComponent<AudioSource>();
     }
 
     public void PlayFootStep()
     {
         float randomVolume = UnityEngine.Random.Range(0.2f, 0.5f);
         float randomPitch = UnityEngine.Random.Range(0.8f, 1.2f);
-        
+
         audioSource.volume = randomVolume;
         audioSource.pitch = randomPitch;
 
@@ -29,5 +31,13 @@ public class PlayerSFX : MonoBehaviour
     public void PlayGravityFlip()
     {
         gravitySource.Play();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "ResetPoint")
+        {
+            checkPointSource.Play();
+        }
     }
 }
