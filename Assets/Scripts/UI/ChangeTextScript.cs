@@ -17,7 +17,7 @@ public class ChangeTextScript : MonoBehaviour
 
     public void ChangeText()
     {
-        if (currentText <= strings.Count)
+        if (currentText+1 <= strings.Count)
         {
             text.text = strings[currentText];
             currentText++;
