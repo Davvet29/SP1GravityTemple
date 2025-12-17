@@ -30,7 +30,7 @@ public class DeathScript : MonoBehaviour
         if(dead = true && deathTimer < 0)
         {
             dead = false;
-            rb.FreezePositionX;
+            //rb.FreezePositionX;
             playerTransform = currentResetPoint;
         }
 
