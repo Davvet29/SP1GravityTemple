@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5775448357217485954}
   - component: {fileID: 1864505421912168221}
   - component: {fileID: 6638806943118336644}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DartTrapBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}

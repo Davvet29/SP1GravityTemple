@@ -5185,7 +5185,7 @@ GameObject:
   - component: {fileID: 8635936033962611838}
   - component: {fileID: 2728218002256777062}
   - component: {fileID: 6742026714758895735}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

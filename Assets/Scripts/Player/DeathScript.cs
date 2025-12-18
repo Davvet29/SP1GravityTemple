@@ -17,6 +17,7 @@ public class DeathScript : MonoBehaviour
 
     private float deathTimer;
     private bool dead = false;
+    [SerializeField] private GameObject bloodEffect;
     void Start()
     {
         resetPoints.AddRange(GameObject.FindGameObjectsWithTag("ResetPoint"));
@@ -29,12 +30,10 @@ public class DeathScript : MonoBehaviour
     {
         if (dead == true)
         {
-            Debug.Log("IsDead");
             deathTimer -= Time.deltaTime;
         }
         if (dead == true && deathTimer < 0)
         {
-            Debug.Log("Resetting");
             dead = false;
             rb.constraints = RigidbodyConstraints2D.None;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -45,9 +44,9 @@ public class DeathScript : MonoBehaviour
 
     private void Death()
     {
-        Debug.Log("DIED");
         deathTimer = 0.5f;
         dead = true;
+        bloodEffect.SetActive(true);
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         playerMovementScript.controlEnabled = false;
     }
@@ -55,6 +54,7 @@ public class DeathScript : MonoBehaviour
     private void Reset()
     {
         playerTransform.position = currentResetPoint.position;
+        bloodEffect.SetActive(false);
         ResetPlayer?.Invoke();
     }
 

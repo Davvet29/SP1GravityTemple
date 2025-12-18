@@ -225,11 +225,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsMoving(Vector2 _newPos, Vector2 _oldPos)
     {
-        Debug.Log("oldpos" + _oldPos);
-        Debug.Log("newpos" + _newPos);
         if (Vector2.Distance(_newPos,_oldPos) > 0.00002f)
         {
-            Debug.Log("WE MOVIN!");
             return true;
         }
         else
@@ -357,11 +354,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Reset()
     {
-        gravityDirection = 1;
         gravityCoefficient = 1.2f;
         gravityAcceleration = 1f;
         velocity.y = gravityDirection * -1.0f;
-        Debug.Log("reset");
         controlEnabled = true;
     }
 
