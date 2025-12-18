@@ -4,13 +4,13 @@ using UnityEngine.Events;
 
 public class DeathScript : MonoBehaviour
 {
-    
+
     public UnityEvent ReachedEnd;
     public UnityEvent ResetPlayer;
     private Transform playerTransform;
     private Transform currentResetPoint;
     private int currentResetPointIndex = 0;
-    [SerializeField] private List<GameObject> resetPoints = new(); 
+    [SerializeField] private List<GameObject> resetPoints = new();
     private Rigidbody2D rb;
     [SerializeField]
     private PlayerMovement playerMovementScript;
@@ -25,20 +25,20 @@ public class DeathScript : MonoBehaviour
         currentResetPoint = resetPoints[currentResetPointIndex].transform;
         rb = GetComponent<Rigidbody2D>();
     }
-    private void Update() 
+    private void Update()
     {
-        if(dead == true)
+        if (dead == true)
         {
             Debug.Log("IsDead");
-            deathTimer-= Time.deltaTime;
+            deathTimer -= Time.deltaTime;
         }
-        if(dead == true && deathTimer < 0)
+        if (dead == true && deathTimer < 0)
         {
             Debug.Log("Resetting");
             dead = false;
-            Reset();
             rb.constraints = RigidbodyConstraints2D.None;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            Reset();
         }
 
     }
@@ -60,7 +60,7 @@ public class DeathScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             Death();
         }
@@ -69,7 +69,7 @@ public class DeathScript : MonoBehaviour
         {
             currentResetPoint = collision.transform;
         }
-        if(collision.gameObject.tag == "WinPoint")
+        if (collision.gameObject.tag == "WinPoint")
         {
             currentResetPoint = collision.transform;
             ReachedEnd.Invoke();
