@@ -108,7 +108,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 178
+        width: 256
         height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,33 +124,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: vinesEX2_1
-      rect:
-        serializedVersion: 2
-        x: 177
-        y: 0
-        width: 79
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 72f5e6a367d4b3af0800000000000000
-      internalID: -415653370419847385
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 584733f9c2e9591468b3c3868d2d7c6d
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +139,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       vinesEX2_0: 1549350584822635315
-      vinesEX2_1: -415653370419847385
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
