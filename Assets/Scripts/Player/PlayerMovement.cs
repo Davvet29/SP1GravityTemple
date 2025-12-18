@@ -109,21 +109,24 @@ public class PlayerMovement : MonoBehaviour
         }
         wasGrounded = isGrounded;
         // Flip sprite according to direction (if a sprite renderer has been assigned)
-        if (moveInput.x > 0.01f)
+        if (controlEnabled)
         {
-            spriteRenderer.flipX = false;
-        }
-        else if (moveInput.x < -0.01f)
-        {
-            spriteRenderer.flipX = true;
-        }
-        if (gravityDirection == -1)
-        {
-            spriteRenderer.flipY = true;
-        }
-        else if (gravityDirection == 1)
-        {
-            spriteRenderer.flipY = false;
+            if (moveInput.x > 0.01f)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else if (moveInput.x < -0.01f)
+            {
+                spriteRenderer.flipX = true;
+            }
+            if (gravityDirection == -1)
+            {
+                spriteRenderer.flipY = true;
+            }
+            else if (gravityDirection == 1)
+            {
+                spriteRenderer.flipY = false;
+            }
         }
     }
 
@@ -135,32 +138,34 @@ public class PlayerMovement : MonoBehaviour
         ApplyGravity();
 
         rb.linearVelocity = velocity;
-
-        if (isMoving)
+        if (controlEnabled)
         {
-            animator.SetBool("Walking", true);
-            walkAcceleration *= walkCoefficient;
-            if (walkAcceleration >= maxAcceleration)
+            if (isMoving)
             {
-                walkAcceleration = maxAcceleration;
+                animator.SetBool("Walking", true);
+                walkAcceleration *= walkCoefficient;
+                if (walkAcceleration >= maxAcceleration)
+                {
+                    walkAcceleration = maxAcceleration;
+                }
             }
-        }
-        else if (!isMoving || changedDir)
-        {
-            animator.SetBool("Walking", false);
-            velocity.x = 0;
-            walkAcceleration = 1f;
-        }
-        if (gravityFlipped)
-        {
-            //sound
-            ChangeGravity.Invoke();
-        }
-        gravityFlipped = false;
+            else if (!isMoving || changedDir)
+            {
+                animator.SetBool("Walking", false);
+                velocity.x = 0;
+                walkAcceleration = 1f;
+            }
+            if (gravityFlipped)
+            {
+                //sound
+                ChangeGravity.Invoke();
+            }
+            gravityFlipped = false;
 
-        if (newPos - oldPos < 0.02f * Time.deltaTime)
-        {
-            newPos = oldPos;
+            if (newPos - oldPos < 0.02f * Time.deltaTime)
+            {
+                newPos = oldPos;
+            }
         }
     }
 
@@ -340,6 +345,15 @@ public class PlayerMovement : MonoBehaviour
         {
             spacePressedDown = false;
         }
+    }
+
+    public void Reset()
+    {
+        gravityDirection = 1;
+        gravityCoefficient = 1.2f;
+        gravityAcceleration = 1f;
+        velocity.y = gravityDirection * -1.0f;
+        controlEnabled = true;
     }
 
     private void PlayLandingSound()

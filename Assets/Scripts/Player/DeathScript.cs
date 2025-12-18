@@ -6,18 +6,22 @@ public class DeathScript : MonoBehaviour
 {
     
     public UnityEvent ReachedEnd;
+    public UnityEvent ResetPlayer;
     private Transform playerTransform;
     private Transform currentResetPoint;
     private int currentResetPointIndex = 0;
     [SerializeField] private List<GameObject> resetPoints = new(); 
     private Rigidbody2D rb;
+    [SerializeField]
+    private PlayerMovement playerMovementScript;
 
     private float deathTimer;
-    private bool dead = true;
+    private bool dead = false;
     void Start()
     {
         resetPoints.AddRange(GameObject.FindGameObjectsWithTag("ResetPoint"));
         playerTransform = GetComponent<Transform>();
+        playerMovementScript = GetComponent<PlayerMovement>();
         currentResetPoint = resetPoints[currentResetPointIndex].transform;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -25,23 +29,34 @@ public class DeathScript : MonoBehaviour
     {
         if(dead == true)
         {
+            Debug.Log("IsDead");
             deathTimer-= Time.deltaTime;
+            Debug.Log(deathTimer);
         }
-        if(dead = true && deathTimer < 0)
+        if(dead == true && deathTimer < 0)
         {
+            Debug.Log("Resetting");
             dead = false;
-            //rb.FreezePositionX;
-            playerTransform = currentResetPoint;
+            Reset();
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
     }
 
     private void Death()
     {
-
-        deathTimer = 1;
+        Debug.Log("DIED");
+        deathTimer = 0.5f;
         dead = true;
-        
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        playerMovementScript.controlEnabled = false;
+    }
+
+    private void Reset()
+    {
+        playerTransform.position = currentResetPoint.position;
+        ResetPlayer?.Invoke();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
