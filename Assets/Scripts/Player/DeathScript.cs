@@ -31,7 +31,6 @@ public class DeathScript : MonoBehaviour
         {
             Debug.Log("IsDead");
             deathTimer-= Time.deltaTime;
-            Debug.Log(deathTimer);
         }
         if(dead == true && deathTimer < 0)
         {

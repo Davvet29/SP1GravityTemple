@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -54,8 +55,8 @@ public class PlayerMovement : MonoBehaviour
     private float walkCoefficient = 1.05f;
     private Vector2 velocity;
 
-    private float newPos;
-    private float oldPos;
+    private Vector2 newPos = new();
+    private Vector2 oldPos = new();
     private float newDir;
     private float oldDir;
     private float fallStart;
@@ -74,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
     private float volume;
 
     private float playerHalfHeight;
+    private float playerHalfWidth;
 
     void Awake()
     {
@@ -89,11 +91,12 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
 
         rb.gravityScale = 0;
-        newPos = transform.position.x;
+        newPos = transform.position;
         walkAcceleration = 1f;
         fallStart = transform.position.y;
 
         playerHalfHeight = spriteRenderer.bounds.extents.y;
+        playerHalfWidth = spriteRenderer.bounds.extents.x;
     }
 
     void Update()
@@ -161,36 +164,51 @@ public class PlayerMovement : MonoBehaviour
                 ChangeGravity.Invoke();
             }
             gravityFlipped = false;
-
-            if (newPos - oldPos < 0.02f * Time.deltaTime)
-            {
-                newPos = oldPos;
-            }
         }
     }
 
     private bool LayerCollider()
     {
         if (gravityDirection == 1)
-        {
+        {            
             //bottom
-            return Physics2D.Raycast(
-                transform.position,
-                -Vector2.up,
-                playerHalfHeight + 0.1f,
-                groundLayer
-            );
+
+            if (Physics2D.Raycast(new Vector2(transform.position.x + 0.24f, transform.position.y), -Vector2.up, playerHalfHeight + 0.1f, groundLayer)
+            || Physics2D.Raycast(new Vector2(transform.position.x - 0.16f, transform.position.y), -Vector2.up, playerHalfHeight + 0.1f, groundLayer))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
-            //top
-            return Physics2D.Raycast(
-                transform.position,
-                Vector2.up,
-                playerHalfHeight + 0.1f,
-                groundLayer
-            );
+            if (Physics2D.Raycast(new Vector2(transform.position.x + 0.24f, transform.position.y), Vector2.up, playerHalfHeight + 0.1f, groundLayer)
+            || Physics2D.Raycast(new Vector2(transform.position.x - 0.16f, transform.position.y), Vector2.up, playerHalfHeight + 0.1f, groundLayer))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+    }
+
+    private void UpdateDir()
+    {
+        oldDir = newDir;
+        newDir = GetDir();
+        changedDir = ChangedDirection(newDir, oldDir);
+    }
+
+    private void UpdatePos()
+    {
+        oldPos = newPos;
+        newPos = transform.position;
+        isMoving = IsMoving(newPos, oldPos);
     }
 
     private bool IsGrounded()
@@ -205,10 +223,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool IsMoving(float _newPos, float _oldPos)
+    private bool IsMoving(Vector2 _newPos, Vector2 _oldPos)
     {
-        if (_newPos != _oldPos)
+        Debug.Log("oldpos" + _oldPos);
+        Debug.Log("newpos" + _newPos);
+        if (Vector2.Distance(_newPos,_oldPos) > 0.00002f)
         {
+            Debug.Log("WE MOVIN!");
             return true;
         }
         else
@@ -217,12 +238,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void UpdatePos()
-    {
-        oldPos = newPos;
-        newPos = transform.position.x;
-        isMoving = IsMoving(oldPos, newPos);
-    }
 
     private float GetDir()
     {
@@ -234,13 +249,6 @@ public class PlayerMovement : MonoBehaviour
         {
             return -1;
         }
-    }
-
-    private void UpdateDir()
-    {
-        oldDir = newDir;
-        newDir = GetDir();
-        changedDir = ChangedDirection(oldDir, newDir);
     }
 
     private bool ChangedDirection(float _newDir, float _oldDir)
@@ -353,6 +361,7 @@ public class PlayerMovement : MonoBehaviour
         gravityCoefficient = 1.2f;
         gravityAcceleration = 1f;
         velocity.y = gravityDirection * -1.0f;
+        Debug.Log("reset");
         controlEnabled = true;
     }
 
