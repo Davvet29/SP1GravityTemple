@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Acually spelet/StartScene.unity
     guid: 1d4c2c7de6fbb5948b053c51d9fbcd94
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Acually spelet/IntroScene.unity
     guid: 13bb71461836cc84b9ff6174f10d6b42
   - enabled: 1

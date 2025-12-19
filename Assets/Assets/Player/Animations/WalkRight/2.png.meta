@@ -5,9 +5,6 @@ TextureImporter:
   - first:
       213: 6937817954938267909
     second: 2_0
-  - first:
-      213: 3191122964850554743
-    second: 2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -106,10 +103,10 @@ TextureImporter:
       name: 2_0
       rect:
         serializedVersion: 2
-        x: 104
-        y: 18
-        width: 270
-        height: 252
+        x: 144
+        y: 19
+        width: 277
+        height: 352
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,28 +117,6 @@ TextureImporter:
       bones: []
       spriteID: 5092c600ca4184060800000000000000
       internalID: 6937817954938267909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 2_1
-      rect:
-        serializedVersion: 2
-        x: 280
-        y: 263
-        width: 81
-        height: 81
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7773282ed65294c20800000000000000
-      internalID: 3191122964850554743
       vertices: []
       indices: 
       edges: []
@@ -161,7 +136,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       2_0: 6937817954938267909
-      2_1: 3191122964850554743
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

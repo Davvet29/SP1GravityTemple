@@ -22,7 +22,7 @@ public class ChangeTextScript : MonoBehaviour
             text.text = strings[currentText];
             currentText++;
         }
-        else
+        if (currentText+1 > strings.Count)
         {
             this.gameObject.SetActive(false);
         }
