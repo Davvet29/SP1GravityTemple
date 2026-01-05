@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -169,12 +170,15 @@ public class PlayerMovement : MonoBehaviour
 
     private bool LayerCollider()
     {
+        Debug.DrawRay(new Vector2(transform.position.x + 0.24f, transform.position.y), -Vector2.up,Color.blue, playerHalfHeight + 0.1f);
+        Debug.DrawRay(new Vector2(transform.position.x - 0.16f, transform.position.y), -Vector2.up,Color.blue, playerHalfHeight + 0.1f);
+
         if (gravityDirection == 1)
-        {            
+        {
             //bottom
 
-            if (Physics2D.Raycast(new Vector2(transform.position.x + 0.24f, transform.position.y), -Vector2.up, playerHalfHeight + 0.1f, groundLayer)
-            || Physics2D.Raycast(new Vector2(transform.position.x - 0.16f, transform.position.y), -Vector2.up, playerHalfHeight + 0.1f, groundLayer))
+            if (Physics2D.Raycast(new Vector2(transform.position.x + 0.24f, transform.position.y), -Vector2.up, playerHalfHeight + 0.3f, groundLayer)
+            || Physics2D.Raycast(new Vector2(transform.position.x - 0.16f, transform.position.y), -Vector2.up, playerHalfHeight + 0.3f, groundLayer))
             {
                 return true;
             }
@@ -185,8 +189,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (Physics2D.Raycast(new Vector2(transform.position.x + 0.24f, transform.position.y), Vector2.up, playerHalfHeight + 0.1f, groundLayer)
-            || Physics2D.Raycast(new Vector2(transform.position.x - 0.16f, transform.position.y), Vector2.up, playerHalfHeight + 0.1f, groundLayer))
+            if (Physics2D.Raycast(new Vector2(transform.position.x + 0.24f, transform.position.y), Vector2.up, playerHalfHeight + 0.3f, groundLayer)
+            || Physics2D.Raycast(new Vector2(transform.position.x - 0.16f, transform.position.y), Vector2.up, playerHalfHeight + 0.3f, groundLayer))
             {
                 return true;
             }
