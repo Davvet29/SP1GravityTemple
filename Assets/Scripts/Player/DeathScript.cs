@@ -15,6 +15,8 @@ public class DeathScript : MonoBehaviour
     [SerializeField]
     private PlayerMovement playerMovementScript;
 
+    private AudioSource audio;
+
     private float deathTimer;
     private bool dead = false;
     [SerializeField] private GameObject bloodEffect;
@@ -25,6 +27,7 @@ public class DeathScript : MonoBehaviour
         playerMovementScript = GetComponent<PlayerMovement>();
         currentResetPoint = resetPoints[currentResetPointIndex].transform;
         rb = GetComponent<Rigidbody2D>();
+        audio = GameObject.Find("DeathSound").GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -44,6 +47,7 @@ public class DeathScript : MonoBehaviour
 
     private void Death()
     {
+        audio.Play();
         deathTimer = 0.5f;
         dead = true;
         bloodEffect.SetActive(true);

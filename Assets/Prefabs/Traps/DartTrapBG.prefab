@@ -107,8 +107,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dart: {fileID: 8054040865936158956, guid: 73a796f01b2553f4c975889c5daabb5a, type: 3}
   dartPositionObject: {fileID: 4595427503247321471}
-  dartInterval: 5
-  offset: 0
+  dartInterval: 2
+  offset: 1.2
 --- !u!61 &1864505421912168221
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ AudioSource:
   m_GameObject: {fileID: 2833702063656349287}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 7205453545567761590, guid: 635394d7d96ab6e49a034263e41e233d, type: 2}
+  OutputAudioMixerGroup: {fileID: -1736409051213901334, guid: 635394d7d96ab6e49a034263e41e233d, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 7ff82fbc3884e4e448489133af30292e, type: 3}
   m_PlayOnAwake: 0
