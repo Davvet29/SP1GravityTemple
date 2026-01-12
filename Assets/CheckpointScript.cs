@@ -3,9 +3,8 @@ using UnityEngine.Rendering.Universal;
 
 public class CheckpointScript : MonoBehaviour
 {
-    public bool IsActive;
-    void Update()
+    public void ChangeState(bool active)
     {
-        gameObject.SetActive(IsActive);
+        gameObject.SetActive(active);
     }
 }
