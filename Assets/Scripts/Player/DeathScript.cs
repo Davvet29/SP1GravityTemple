@@ -14,11 +14,13 @@ public class DeathScript : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]
     private PlayerMovement playerMovementScript;
+    [SerializeField]
+    private Animator animator;
 
     private AudioSource audio;
 
     private float deathTimer;
-    private bool dead = false;
+    public bool dead = false;
     [SerializeField] private GameObject bloodEffect;
     void Start()
     {
@@ -28,6 +30,7 @@ public class DeathScript : MonoBehaviour
         currentResetPoint = resetPoints[currentResetPointIndex].transform;
         rb = GetComponent<Rigidbody2D>();
         audio = GameObject.Find("DeathSound").GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -38,6 +41,7 @@ public class DeathScript : MonoBehaviour
         if (dead == true && deathTimer < 0)
         {
             dead = false;
+            animator.SetBool("IsDead", false);
             rb.constraints = RigidbodyConstraints2D.None;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             Reset();
@@ -50,6 +54,7 @@ public class DeathScript : MonoBehaviour
         audio.Play();
         deathTimer = 0.5f;
         dead = true;
+        animator.SetBool("IsDead", true);
         bloodEffect.SetActive(true);
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         playerMovementScript.controlEnabled = false;
