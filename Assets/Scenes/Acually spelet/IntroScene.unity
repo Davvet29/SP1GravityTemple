@@ -1013,8 +1013,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 2083690129}
   strings:
-  - Actual story text might be here
-  - Or not if we remove this and add a cutscene
+  - The gauntlet challenges those who are unworthy. Those who falter to grasp their
+    power and live among the living.
+  - Awaken thee, Demi-God of weakened flesh. Thee who may not yet enter the mortal
+    realm, for you are the unworthy.
+  - The gauntlet shall be your obstacle, your right off passage. It shall grant you
+    the opportunity of freedom and life if overcome.
+  - Awaken thee, you who controls the ground you choose to tread. For you may yet
+    live among us. As one of us.
+  - Arise now, Mitl. Prove your mettle. The gauntlet awaits you.
 --- !u!1 &1783118071
 GameObject:
   m_ObjectHideFlags: 0
