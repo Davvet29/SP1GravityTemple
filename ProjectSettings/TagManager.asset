@@ -45,11 +45,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: backgroundWalls
+    uniqueID: 4248774695
+    locked: 0
+  - name: Groundlayer
+    uniqueID: 3026291513
+    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Ground
-    uniqueID: 4248774695
     locked: 0
   m_RenderingLayers:
   - Default
