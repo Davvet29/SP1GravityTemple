@@ -77,7 +77,8 @@ public class DeathScript : MonoBehaviour
         if (collision.gameObject.tag == "ResetPoint")
         {
             Debug.Log(currentResetPoint.gameObject.GetComponentInChildren<CheckpointScript>(true));
-            currentResetPoint.GetComponentInChildren<CheckpointScript>(true).ChangeState(false);
+
+            currentResetPoint?.GetComponentInChildren<CheckpointScript>(true).ChangeState(false);
             currentResetPoint = collision.transform;
             currentResetPoint.GetComponentInChildren<CheckpointScript>(true).ChangeState(true);
 
