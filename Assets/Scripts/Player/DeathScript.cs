@@ -73,7 +73,10 @@ public class DeathScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Death();
+            if(!dead)
+            {
+                Death();                
+            }
         }
 
         if (collision.gameObject.tag == "ResetPoint")
