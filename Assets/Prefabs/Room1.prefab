@@ -97,12 +97,12 @@ MonoBehaviour:
       Enabled: 1
       Size: {x: 0.14624996, y: 0}
     HardLimits:
-      Enabled: 0
-      Size: {x: 0.8, y: 0.8}
+      Enabled: 1
+      Size: {x: 3, y: 0.4}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 1, y: 1, z: 1}
+  Damping: {x: 1, y: 0.5, z: 1}
   Lookahead:
     Enabled: 0
     Time: 0
