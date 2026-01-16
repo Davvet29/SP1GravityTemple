@@ -451,6 +451,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: temple tile bottom right
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 543d136642ec8d645aac2596d616013c
+      internalID: -1620840436435771181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -476,7 +498,7 @@ TextureImporter:
       t2: -586985003
       t3: 1829606204
       t4: 1763267500
-      temple tileset v4_0: -1620840436435771181
+      temple tile bottom right: -1620840436435771181
       temple tileset v4_1: 1515787983
       temple tileset v4_10: 1960007032
       temple tileset v4_11: 611990070
