@@ -66,6 +66,7 @@ public class DeathScript : MonoBehaviour
     {
         playerTransform.position = currentResetPoint.position;
         bloodEffect.SetActive(false);
+        playerMovementScript.SetGravity(currentResetPoint.GetComponentInChildren<CheckpointScript>(true).gravityDirection);
         ResetPlayer?.Invoke();
     }
 

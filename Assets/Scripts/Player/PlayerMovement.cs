@@ -261,7 +261,10 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
     }
-
+    public void SetGravity(int direction)
+    {
+        gravityDirection = direction;
+    }
     private void ApplyGravity()
     {
         // Applies a set gravity for when player is grounded
