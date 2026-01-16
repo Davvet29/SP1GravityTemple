@@ -22,6 +22,7 @@ public class DeathScript : MonoBehaviour
     private float deathTimer;
     public bool dead = false;
     [SerializeField] private GameObject bloodEffect;
+        private AudioSource checkPointSource;
     void Start()
     {
         resetPoints.AddRange(GameObject.FindGameObjectsWithTag("ResetPoint"));
@@ -31,6 +32,7 @@ public class DeathScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         audio = GameObject.Find("DeathSound").GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        checkPointSource = GameObject.Find("CheckpointSound").GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -76,6 +78,11 @@ public class DeathScript : MonoBehaviour
 
         if (collision.gameObject.tag == "ResetPoint")
         {
+            if(collision.gameObject != currentResetPoint.gameObject)
+            {
+                Debug.Log("playing sound");
+                checkPointSource.Play(); 
+            }
             Debug.Log(currentResetPoint.gameObject.GetComponentInChildren<CheckpointScript>(true));
 
             currentResetPoint?.GetComponentInChildren<CheckpointScript>(true).ChangeState(false);
