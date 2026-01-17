@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -37,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private float maxGravityAcceleration = 10f;
+    [SerializeField]
+    private float gravityFlipSpeed;
 
     public UnityEvent ChangeGravity;
 
@@ -52,7 +55,10 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private float walkCoefficient = 1.05f;
+    [SerializeField]
     private Vector2 velocity;
+    [SerializeField]
+    private float maxVelocityX;
 
     private Vector2 newPos = new();
     private Vector2 oldPos = new();
@@ -213,18 +219,6 @@ public class PlayerMovement : MonoBehaviour
         isMoving = IsMoving(newPos, oldPos);
     }
 
-    private bool IsGrounded()
-    {
-        if (LayerCollider() == true)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     private bool IsMoving(Vector2 _newPos, Vector2 _oldPos)
     {
         if (Vector2.Distance(_newPos,_oldPos) > 0.00002f)
@@ -237,6 +231,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool IsGrounded()
+    {
+        if (LayerCollider() == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     private float GetDir()
     {
@@ -249,6 +254,7 @@ public class PlayerMovement : MonoBehaviour
             return -1;
         }
     }
+
 
     private bool ChangedDirection(float _newDir, float _oldDir)
     {
@@ -265,38 +271,46 @@ public class PlayerMovement : MonoBehaviour
     {
         gravityDirection = direction;
     }
+
+    //Gravity----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started && controlEnabled && gravityFlips >= 0)
+        {
+            gravityDirection *= -1;
+            gravityFlips--;
+            gravityFlipped = true;
+
+            if(isGrounded)
+            {
+               gravityAcceleration = maxAcceleration;
+            }
+
+            if(!isGrounded && MathF.Abs(velocity.y) > gravityFlipSpeed)
+            {
+                velocity.y = gravityFlipSpeed * gravityDirection;
+            }
+        }
+    }
+
     private void ApplyGravity()
     {
         // Applies a set gravity for when player is grounded
         if (isGrounded)
         {
-            gravityCoefficient = 1.2f;
             gravityAcceleration = 1f;
             velocity.y = gravityDirection * -1.0f;
         }
         // Updates fall speed with gravity if object isn't grounded
         else
         {
-            UpdateCoefficient();
             gravityAcceleration *= gravityCoefficient;
-            if (gravityAcceleration >= maxGravityAcceleration)
+            if(gravityAcceleration > maxGravityAcceleration)
             {
-                gravityAcceleration = maxGravityAcceleration;
+                gravityAcceleration = maxGravityAcceleration;                
             }
-
             SetVelocity();
-        }
-    }
-
-    private void UpdateCoefficient()
-    {
-        if (spacePressedDown && gravityCoefficient <= 1.2f)
-        {
-            gravityCoefficient += 0.007f;
-        }
-        else if (!spacePressedDown && gravityCoefficient != 1.2f)
-        {
-            gravityCoefficient = 1.2f;
         }
     }
 
@@ -304,10 +318,10 @@ public class PlayerMovement : MonoBehaviour
     {
         velocity.y +=
             gravityDirection * (Physics2D.gravity.y * gravityAcceleration * Time.deltaTime);
-        velocity.y = Mathf.Clamp(velocity.y, -60, 60);
+        velocity.y = Mathf.Clamp(velocity.y, -maxVelocityX, maxVelocityX);
     }
 
-    Vector2 TranslateInputToVelocity(Vector2 input)
+        Vector2 TranslateInputToVelocity(Vector2 input)
     {
         // Make the character move along the X-axis
         return new Vector2(input.x * maxSpeed * (walkAcceleration / 2), velocity.y);
@@ -327,44 +341,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Handle Jump-input
-    // This method can be triggered through the UnityEvent in PlayerInput
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        if (context.started && controlEnabled && gravityFlips >= 0)
-        {
-            if (quickGravityFlip && isGrounded)
-            {
-                gravityAcceleration = 3f;
-            }
-            else
-            {
-                gravityAcceleration = 1f;
-            }
-            if (floatyGravity && !isGrounded)
-            {
-                gravityCoefficient = 1f;
-            }
-            velocity.y = 1;
-            gravityDirection *= -1;
-            gravityFlips--;
-            gravityFlipped = true;
-            spacePressedDown = true;
-        }
-        if (context.canceled)
-        {
-            spacePressedDown = false;
-        }
-    }
-
+//Reset
     public void Reset()
     {
-        gravityCoefficient = 1.2f;
         gravityAcceleration = 1f;
         velocity.y = gravityDirection * -1.0f;
         controlEnabled = true;
     }
-
+//Sound------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     private void PlayLandingSound()
     {
         fallDist = Mathf.Abs(transform.position.y - fallStart);
